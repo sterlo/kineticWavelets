@@ -1,0 +1,14 @@
+exportMethods(
+	"waveCorrelation",
+	"plotDetailAverage",
+	"plotSmoothAverage",
+	"plotBaseCorrelation"
+)
+exportClasses(
+	"kineticWavelets"
+)
+import(pbh5)
+import(Biostrings)
+import(seqinr)
+import(wavethresh)
+import(shortread)

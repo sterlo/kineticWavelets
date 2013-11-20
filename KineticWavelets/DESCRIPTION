@@ -1,0 +1,14 @@
+Package: kineticWavelets
+Type: Package
+Title: Small Library for Analysis of PacBio Kinetic Data using wavelets
+Version: 1.0
+Description: kineticWavelets uses wavelets to analyse pacific Bio Kinetics datasets.
+Date: 2013-11-18
+Author: Sterling Saway 
+Depends: R (>= 3.0.0)
+Imports: pbh5, seqinr, wavethresh, Biostrings,ShortRead
+License: GPL-2
+biocViews: PacBio, wavelets
+Maintainer: James Boocock <smilefreak@gmx.com>
+Collate: AllClasses.R Constructor.R waveCorrelation.R plotDetailAverage.R plotSmoothAverage.R baseCorrelation.R
+
