@@ -1,6 +1,6 @@
-etGeneric("baseCorrelation",
+setGeneric("baseCorrelation",
            function(Object, ...){standardGeneric("baseCorrelation")})
-etGeneric("waveCorrelation",
+setGeneric("waveCorrelation",
            function(Object, ...){standardGeneric("waveCorrelation")})
 setGeneric("plotDetailAverage",
            function(Object, ...){standardGeneric("plotDetailAverage")})
