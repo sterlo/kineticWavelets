@@ -1,6 +1,3 @@
-setGeneric("plotDetailAverage",
-           function(Object, ...){standardGeneric("plotDetailAverage")})
-
 setMethod("plotDetailAverage","KineticWavelets",
 		function(Object,waveCorrelation){
 		DNAPattern = Object@DNAPattern

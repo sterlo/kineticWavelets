@@ -1,7 +1,3 @@
-setGeneric("plotSmoothAverage",
-           function(Object, ...){standardGeneric("plotSmoothAverage")})
-
-
 setMethod('plotSmoothAverage',"KineticWavelets",
 				function(Object,waveCorrelation){
 		shift.window = Object@shift.window

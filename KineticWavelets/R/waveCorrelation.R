@@ -25,8 +25,6 @@
 ###################################
 #Main function to calculate wavelet averages and plot
 #The shift window determine where in the 128 bp window the element of interest lies.  Default is 32 so that the element starts at base 33 in the window (i.e. shifted from 1 by 32).
-setGeneric("waveCorrelation",
-           function(Object, ...){standardGeneric("waveCorrelation")})
 
 
 setMethod("waveCorrelation","KineticWavelets",

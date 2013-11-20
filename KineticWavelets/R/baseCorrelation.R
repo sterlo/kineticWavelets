@@ -1,5 +1,3 @@
-setGeneric("plotBaseCorrelation",
-           function(Object, ...){standardGeneric("plotBaseCorrelation")})
 setMethod("baseCorrelation","KineticWavelets",
 		function(Object,DNAPattern=NULL,minReadLength=200,maxReads=10000){
 
