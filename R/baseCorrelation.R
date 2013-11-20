@@ -1,260 +1,175 @@
 setMethod("baseCorrelation","KineticWavelets",
 		function(Object,DNAPattern=NULL,minReadLength=200,maxReads=10000){
-
-	
 	if(!is.null(DNAPattern)){
-	
-	waveSeq <- function(seqz,patternz,return.counts=T){
-	seq.grep <- gregexpr(patternz,seqz)
 
-	wave.pos=list()
-	if( seq.grep[[1]][1]!=-1){
-	for(i in 1:length(seq.grep[[1]])) {
-	wave.pos[[i]] <- c(as.numeric(seq.grep[[1]][i]):c(-1+as.numeric(seq.grep[[1]][i])+as.numeric(attr(seq.grep[[1]], "match.length")[[i]])))
-}
+        tempst <- getTemplateStrand(h5)
 
-wave.seq <- c(rep(0,nchar(seqz)))
-wave.seq[unlist(wave.pos)] <- 1
-if(return.counts==T){cat("\n",length(seq.grep[[1]]),"regions found \n")}
-return(wave.seq)
-}
-if( seq.grep[[1]][1]==-1 ) {cat("\npattern not found \n")} 
-}
+    endz <- getTemplateEnd(h5)
+    startz <- getTemplateStart(h5)
 
-###################################
-###################################
-#Main function to calculate wavelet averages and plot
-#The shift window determine where in the 128 bp window the element of interest lies.  Default is 32 so that the element starts at base 33 in the window (i.e. shifted from 1 by 32).
+    wFwd <- which(tempst=="0")
+    wRev <- which(tempst=="1")
 
-#Get cmp.h5 strands and read positions	
+    fwdStart <- startz[wFwd]
+    revStart <- startz[wRev]
 
-tempst <- getTemplateStrand(h5)
-
-endz <- getTemplateEnd(h5)
-startz <- getTemplateStart(h5)
-
-w.fwd <- which(tempst=="0")
-w.rev <- which(tempst=="1")
-
-fwd.start <- startz[w.fwd]
-rev.start <- startz[w.rev]
-
-fwd.end <- endz[w.fwd]
-rev.end <- endz[w.rev]
-
-
+    fwdEnd <- endz[wFwd]
+    revEnd <- endz[wRev]
 ##Make reference information, assumes reff in fasta	
-	
-reff.fwd <- reff[[1]]
-reff.fwd <- DNAString(c2s(reff.fwd))
-reff.rev <- reverseComplement(reff.fwd)
+    reffFwd <- reff[[1]]
+    reffFwd <- DNAString(c2s(reffFwd))
+    reffRev <- reverseComplement(reffFwd)
 
-#grep for positions
-grepF <- gregexpr(DNAPattern,reff.fwd)
-grepR <- gregexpr(DNAPattern,reff.rev)
+    #grep for positions
+    grepF <- gregexpr(DNAPattern,reffFwd)
+    grepR <- gregexpr(DNAPattern,reffRev)
 
-##Get read corresponding to the position of the element on the opposite strand.  
+    gF128=list()
+    gR128=list()
 
-#Window position forward template
-gF128=list()
-#Window position reverse template
-gR128=list()
+    if (grepF[[1]][1]!=-1){
+        for(i in 1:length(grepF[[1]])) {	
+            gF128[[i]] <-  c(grepF[[1]][i]+1,
+            grepF[[1]][i] + attr(grepF[[1]],"match.length")[[i]])-1
+        }
+    }
 
-if (grepF[[1]][1]!=-1){
-for(i in 1:length(grepF[[1]])) {	
-	gF128[[i]] <-  c(grepF[[1]][i]+1,
-	grepF[[1]][i] + attr(grepF[[1]],"match.length")[[i]])-1
-}
-}
+    if (grepR[[1]][1]!=-1){
+        for(i in 1:length(grepR[[1]])) {
+            gR128[[i]] <- c( nchar(reffRev) - grepR[[1]][i] + 1 ,
+            nchar(reffRev) - grepR[[1]][i]-attr(grepR[[1]],"match.length")[[i]] +2 
+         )
+    }
+    }
 
-if (grepR[[1]][1]!=-1){
-for(i in 1:length(grepR[[1]])) {
-	
-	
-	gR128[[i]] <- c( nchar(reff.rev) - grepR[[1]][i] + 1 ,
-	nchar(reff.rev) - grepR[[1]][i]-attr(grepR[[1]],"match.length")[[i]] +2 
-	 )
-}
-}
+    cat("\n checking pattern in forward sequence \n")
+    interp.1 <- grepSeq(reffFwd,DNAPattern)
+    cat("\n checking pattern in reverse sequence \n")
+    interp.0 <- rev(grepSeq(reffRev,DNAPattern))
+    totalElements=c(length(grepF[[1]][grepF[[1]]!=-1])+length(grepR[[1]][grepR[[1]]!=-1]))
 
-	####################################################
-#Set up interpretation of sequence
-
-cat("\n checking pattern in forward sequence \n")
-interp.1 <- waveSeq(reff.fwd,DNAPattern)
-cat("\n checking pattern in reverse sequence \n")
-interp.0 <- rev(waveSeq(reff.rev,DNAPattern))
+    meanElementSize=sum(
+    c(
+    if(attr(grepF[[1]],"match.length")[1]!=-1) attr(grepF[[1]],"match.length")
+    ,
+    if(attr(grepR[[1]],"match.length")[1]!=-1) attr(grepR[[1]],"match.length"))
+    )/totalElements
 
 
-totalElements=c(length(grepF[[1]][grepF[[1]]!=-1])+length(grepR[[1]][grepR[[1]]!=-1]))
-
-meanElementSize=sum(
-c(
-if(attr(grepF[[1]],"match.length")[1]!=-1) attr(grepF[[1]],"match.length")
-,
-if(attr(grepR[[1]],"match.length")[1]!=-1) attr(grepR[[1]],"match.length"))
-)/totalElements
-
-
-cat("\n Reference contains",totalElements,"unique matches",sep=" ")
+    cat("\n Reference contains",totalElements,"unique matches",sep=" ")
 
 	rlz<-getReadLength(h5)
 
-fwd.rlz=rlz[w.fwd]
-rev.rlz=rlz[w.rev]
-
-##Find reads that have window forward
-
-g0read=list()
-
-if (grepR[[1]][1]!=-1){
-for(j in 1:length(gR128)){
-
-		g0read[[j]] <- w.fwd[which(fwd.start<=gR128[[j]][2] & fwd.end>=gR128[[j]][1] & fwd.rlz>minReadLength)]
-	}
-}
-##Find reads that have window reverse
-
-g1read=list()
-
-if (grepF[[1]][1]!=-1){
-for(j in 1:length(gF128)){
-
-		g1read[[j]] <- w.rev[which(rev.start<=gF128[[j]][1] & rev.end>=gF128[[j]][2] & rev.rlz>minReadLength) ]
-	}
-}
+    fwd.rlz=rlz[wFwd]
+    rev.rlz=rlz[wRev]
 
 
+    g0read=list()
 
-############
+    if (grepR[[1]][1]!=-1){
+        for(j in 1:length(gR128)){
 
-readsU=unique(c(unlist(g0read),unlist(g1read)))
-########################################
-readsUsed=length(readsU)
-cat("\n \n File contains",readsUsed,"reads covering pattern \n",sep=" ")
+            g0read[[j]] <- wFwd[which(fwdStart<=gR128[[j]][2] & fwdEnd>=gR128[[j]][1] & fwd.rlz>minReadLength)]
+        }
+    }
+    ##Find reads that have windowReverse
 
-if (maxReads<readsUsed) {cat("\n Only",maxReads,"reads used.")}
+    g1read=list()
 
-	idxx=sample(unique(c(unlist(g0read),unlist(g1read))),min(maxReads,readsUsed))
+    if (grepF[[1]][1]!=-1){
+        for(j in 1:length(gF128)){
 
+                g1read[[j]] <- wRev[which(revStart<=gF128[[j]][1] & revEnd>=gF128[[j]][2] & rev.rlz>minReadLength) ]
+        }
+    }
 
-}
+    readsU=unique(c(unlist(g0read),unlist(g1read)))
+    readsUsed=length(readsU)
+    cat("\n \n File contains",readsUsed,"reads covering pattern \n",sep=" ")
 
-if(is.null(DNAPattern)){
-	
-		rlz<-getReadLength(h5)
+    if (maxReads<readsUsed) {cat("\n Only",maxReads,"reads used.")}
 
-	whichLong=which(rlz>minReadLength)
-	
-	idxx=sample(whichLong,min(maxReads,length(whichLong)))
-	
-}
+        idxx=sample(unique(c(unlist(g0read),unlist(g1read))),min(maxReads,readsUsed))
+    }
+    if(is.null(DNAPattern)){
+        rlz<-getReadLength(h5)
+        whichLong=which(rlz>minReadLength)
+        idxx=sample(whichLong,min(maxReads,length(whichLong)))
+    }
 
-###################################
-###################################
-###################################
-###################################
+        
+    ipd <- getIPD (h5, idx=idxx)
+    align <- getAlignments(h5 , idx=idxx)
+    instsCount=list()
+    if(!is.null(DNAPattern)) interp=list();
+        for ( i in 1:length(ipd)){
+            instsCount[[i]]=c(rep(0,length(ipd[[i]])))
+            ins <- which(align[[i]][,2]=="-")
+            if(length(ins)==0) {
+                align[[i]]=align[[i]][,2]
+            }
+            if(length(ins)>0){	
+                tempICount=1
+                for ( j in 1:length(ins)){
+                    pos=ins[j]
+                    nxtup=pos+1
+                        if(ins[j+1]>nxtup & j<length(ins)){
+                            instsCount[[i]][nxtup]=tempICount
+                            tempICount=1
+                        }
+                        else{
+                            tempICount=tempICount+1
+                        }
+                }
+                
+                align[[i]]=align[[i]][-ins,2]
+                ipd[[i]]=ipd[[i]][-ins]	
+                instsCount[[i]]=instsCount[[i]][-ins]
+                            
+            }
 
-	
-	
-	
-ipd <- getIPD (h5, idx=idxx)
+            if(!is.null(DNAPattern)){
+            interp[[i]]=rev(waveSeq(reverseComplement(DNAString(c2s(align[[i]]))), DNAPattern,return.counts=F))
+            }
 
-align <- getAlignments(h5 , idx=idxx)
+        }
 
-instsCount=list()
+    ipd=unlist(ipd)
+    ipd[is.na(ipd)]=0
+    align=unlist(align)
+    IC=unlist(instsCount)
+    maxpwr=floor(log(length(unlist(ipd)),base=2))
+    ipd=ipd[1:(2^maxpwr)]
+    align=align[1:(2^maxpwr)]
+    IC=IC[1:(2^maxpwr)]
+    aa=rep(0,2^maxpwr)
+    tt=rep(0,2^maxpwr)
+    cc=rep(0,2^maxpwr)
+    gg=rep(0,2^maxpwr)
+    aa[align=="T"]=1
+    tt[align=="A"]=1
+    cc[align=="G"]=1
+    gg[align=="C"]=1
 
-if(!is.null(DNAPattern)) interp=list();
+    tot.length=length(ipd)
 
-for ( i in 1:length(ipd)){
-	
-	instsCount[[i]]=c(rep(0,length(ipd[[i]])))
-	
-	#Find inserts
+    p.a=sum(aa)/tot.length
+    p.t=sum(tt)/tot.length
+    p.c=sum(cc)/tot.length
+    p.g=sum(gg)/tot.length
 
-		ins <- which(align[[i]][,2]=="-")
-		
-##If there are no inserts
-  if(length(ins)==0) {
-  	align[[i]]=align[[i]][,2]
-}
+    dat=cbind(ipd,IC,aa,tt,cc,gg)
+    names=c("IPD",'Inserts',
+    paste("A (",round(p.a,2),")",sep=""),
+    paste("T (",round(p.t,2),")",sep=""),
+    paste("C (",round(p.c,2),")",sep=""),
+    paste('G (',round(p.g,2),")",sep=""))
 
-###If there are inserts
-	if(length(ins)>0){	
-			
-			tempICount=1
+    colnames(dat)=names
 
-for ( j in 1:length(ins)){
-		pos=ins[j]
-		nxtup=pos+1
-
-		if(ins[j+1]>nxtup & j<length(ins)){
-			instsCount[[i]][nxtup]=tempICount
-			
-			tempICount=1
-		}
-		else{
-			tempICount=tempICount+1
-		}
-	}
-	
-			##Finally, remove insert from all data		
-		align[[i]]=align[[i]][-ins,2]
-		ipd[[i]]=ipd[[i]][-ins]	
-		instsCount[[i]]=instsCount[[i]][-ins]
-					
-}
-
-if(!is.null(DNAPattern)){
-interp[[i]]=rev(waveSeq(reverseComplement(DNAString(c2s(align[[i]]))), DNAPattern,return.counts=F))
-}
-
-}
-
-ipd=unlist(ipd)
-
-		###turn NA in ipd into 0	
-		ipd[is.na(ipd)]=0
-
-align=unlist(align)
-IC=unlist(instsCount)
-
-
-maxpwr=floor(log(length(unlist(ipd)),base=2))
-
-ipd=ipd[1:(2^maxpwr)]
-align=align[1:(2^maxpwr)]
-IC=IC[1:(2^maxpwr)]
-
-aa=rep(0,2^maxpwr)
-tt=rep(0,2^maxpwr)
-cc=rep(0,2^maxpwr)
-gg=rep(0,2^maxpwr)
-
-aa[align=="T"]=1
-tt[align=="A"]=1
-cc[align=="G"]=1
-gg[align=="C"]=1
-
-tot.length=length(ipd)
-
-p.a=sum(aa)/tot.length
-p.t=sum(tt)/tot.length
-p.c=sum(cc)/tot.length
-p.g=sum(gg)/tot.length
-
-dat=cbind(ipd,IC,aa,tt,cc,gg)
-names=c("IPD",'Inserts',
-paste("A (",round(p.a,2),")",sep=""),
-paste("T (",round(p.t,2),")",sep=""),
-paste("C (",round(p.c,2),")",sep=""),
-paste('G (',round(p.g,2),")",sep=""))
-
-colnames(dat)=names
-
-# Maybe move this function
-return(dat)
-}
+    # Maybe move this function
+    return(dat)
+})
 pdf('base_corr.pdf')
 
 par(mfcol=c(length(names),length(names)),mar=c(0,0,0,0.5),oma=c(4,3,3,2),xaxt="s",cex=0.5,las=1)
