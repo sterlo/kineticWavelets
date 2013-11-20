@@ -1,7 +1,7 @@
 setMethod("waveCorrelation","KineticWavelets",
-			function(Object,DNAPattern,max.reads=1000,shiftWindow=64,total.time=TRUE,filterNumber=1,shrink=1){
-	h5 = Object@h5
-	reff = Object@reff
+            function(Object,DNAPattern,max.reads=1000,shiftWindow=64,total.time=TRUE,filterNumber=1,shrink=1){
+    h5 = Object@h5
+    reff = Object@reff
 
     tempst <- getTemplateStrand(h5)
 
@@ -123,7 +123,7 @@ setMethod("waveCorrelation","KineticWavelets",
         if(k <= fwd_length){
             reading_g0 = T
         }else{
-            reading_g0 = F	
+            reading_g0 = F  
         }
         if(length(idx)>0){
         posit <- getTemplatePosition(h5,idx=idx)
@@ -158,7 +158,7 @@ setMethod("waveCorrelation","KineticWavelets",
               }
           }
         }
-    ##remove insert from all data		
+    ##remove insert from all data       
             
             align[[i]] <- align[[i]][-ins,2]
             ipd[[i]] <- ipd[[i]][-ins]
@@ -167,14 +167,14 @@ setMethod("waveCorrelation","KineticWavelets",
             if (total.time==TRUE) instsTime <- instsTime[-ins];
             }
         if(reading_g0){
-          positz <- c(gR128[[k]][1]:gR128[[k]][2])	
+          positz <- c(gR128[[k]][1]:gR128[[k]][2])  
         } else {
             positz <- c(gF128[[k-fwd_length]][2]:gF128[[k-fwd_length]][1])
         }
         align[[i]] <- align[[i]][match(positz,posit[[i]])]
         ipd[[i]] <- ipd[[i]][match(positz,posit[[i]])]
         pw[[i]] <- pw[[i]][match(positz,posit[[i]])]
-        if (total.time==TRUE)	instsTime <- instsTime[match(positz,posit[[i]])];
+        if (total.time==TRUE)   instsTime <- instsTime[match(positz,posit[[i]])];
         posit[[i]] <- positz
         if(reading_g0){ 
         interp <- interp.0[posit[[i]]]
@@ -204,12 +204,12 @@ setMethod("waveCorrelation","KineticWavelets",
         for (j in 1:3){
                 detailWave[[j]][st.index:end.index,] = matrix(accessD(ipd.wst,level=7-j),ncol=1)
                     }
-                read_insert = read_insert + 1	
+                read_insert = read_insert + 1   
                 }
         
         }
         k=k+1
-    }	
+    }   
     if (shrink<1){
             for ( j in 1:8){
             qnt  <-  quantile(smoothWave[[j]][,1],probs=1-shrink)
@@ -223,7 +223,7 @@ setMethod("waveCorrelation","KineticWavelets",
         detailWave[[j]][abs(detailWave[[j]])<=qnt]=0
         detailWave[[j]][detailWave[[j]]<0] <- detailWave[[j]][detailWave[[j]]<0]+qnt
         detailWave[[j]][detailWave[[j]]>0] <- detailWave[[j]][detailWave[[j]]>0]-qnt
-                }	
+                }   
     }
         return(list(detailWave=detailWave,smoothWave=smoothWave,totalElements=totalElements,meanElementSize=meanElementSize,alignments=align,DNAPattern=DNAPattern,shiftWindow=shiftWindow,shrink=shrink))
 })
