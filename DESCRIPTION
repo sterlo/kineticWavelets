@@ -10,5 +10,5 @@ Imports: pbh5, seqinr, wavethresh, Biostrings, ShortRead
 License: GPL-2
 biocViews: PacBio, wavelets, kinetics
 Maintainer: James Boocock <smilefreak@gmx.com>
-Collate: AllClasses.R  AllGenerics.R Constructor.R waveCorrelation.R plotDetailAverage.R plotSmoothAverage.R baseCorrelation.R grepSeq.R
+Collate: AllClasses.R  AllGenerics.R Constructor.R waveCorrelation.R plotDetailAverage.R plotSmoothAverage.R baseCorrelation.R grepSeq.R plotBaseCorrelation.R plotPatternCorrelation.R
 

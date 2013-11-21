@@ -1,13 +1,13 @@
-setMethod("plotPatternCorrelation","KineticWavelets",
-    function(Object,baseCorr){
+setMethod("plotPatternCorrelation","list",
+    function(baseCorrelation){
     if(is.null(DNAPattern)){
         stop("DNAPattern is null cannot plotPatternCorrelation")
     } 
-	interp=unlist(baseCorr$interp)[1:2^maxpwr]
-    baseCorr=cbind(baseCorr$baseCorr[,1],baseCorr$baseCorr[,2],interp)
+	interp=unlist(baseCorrelation$interp)[1:2^maxpwr]
+    baseCorrelation=cbind(baseCorrelation$baseCorrelation[,1],baseCorrelation$baseCorrelation[,2],interp)
     names=c("IPD",'Inserts',
     paste('Pattern (',round(sum(interp)/length(interp),2),")",sep=""))
-    colnames(baseCorr)=names
+    colnames(baseCorrelation)=names
     par(mfcol=c(length(names),length(names)),mar=c(0,0,0,0.5),oma=c(4,3,3,2),xaxt="s",cex=0.5,las=1)
 
     levels=11
@@ -19,7 +19,7 @@ setMethod("plotPatternCorrelation","KineticWavelets",
 		    temp <- vector(length=length(levels));
 
         if(i==j) {
-            wave1=wd(baseCorr[,i],filter.number=1,family="DaubExPhase")
+            wave1=wd(baseCorrelation[,i],filter.number=1,family="DaubExPhase")
             for ( level in 1:levels){
                 temp[level]=sum((accessD(wave1,level=(wave1$nlevels - level)))^2);
             }
@@ -30,8 +30,8 @@ setMethod("plotPatternCorrelation","KineticWavelets",
         
         if( i < j){
             
-            wave1=wd(baseCorr[,i],filter.number=1,family="DaubExPhase")
-            wave2=wd(baseCorr[,j],filter.number=1,family="DaubExPhase")
+            wave1=wd(baseCorrelation[,i],filter.number=1,family="DaubExPhase")
+            wave2=wd(baseCorrelation[,j],filter.number=1,family="DaubExPhase")
             for ( level in 1:levels){
                 test <- cor.test((accessD(wave1,level=(wave1$nlevels - level))),                          		(accessD(wave2,level=(wave2$nlevels - level))));
                 temp[level]=test$estimate
@@ -48,8 +48,8 @@ setMethod("plotPatternCorrelation","KineticWavelets",
         }
         #smooth top right
         if( i > j){
-            wave1=wd(baseCorr[,i],filter.number=1,family="DaubExPhase")
-            wave2=wd(baseCorr[,j],filter.number=1,family="DaubExPhase")
+            wave1=wd(baseCorrelation[,i],filter.number=1,family="DaubExPhase")
+            wave2=wd(baseCorrelation[,j],filter.number=1,family="DaubExPhase")
             for ( level in 1:levels){
                 test <- cor.test((accessC(wave1,level=(wave1$nlevels - level))),                          		(accessC(wave2,level=(wave2$nlevels - level))));
                 temp[level]=test$estimate

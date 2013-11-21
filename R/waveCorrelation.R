@@ -1,7 +1,8 @@
-setMethod("waveCorrelation","KineticWavelets",
-            function(Object,DNAPattern,max.reads=1000,shiftWindow=64,total.time=TRUE,filterNumber=1,shrink=1){
-    h5 = Object@h5
-    reff = Object@reff
+setMethod("waveCorrelation",
+    signature("KineticWavelets","character","numeric","numeric","logical","numeric","numeric"),
+            function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
+    h5 = KineticWavelets@h5
+    reff = KineticWavelets@reff
 
     tempst <- getTemplateStrand(h5)
 
@@ -91,7 +92,7 @@ setMethod("waveCorrelation","KineticWavelets",
     readsUsed=c(length(unlist(gread)))
     cat("\n \n File contains",readsUsed,"reads that cover 128 bp windows of interest.\n",sep=" ")
 
-    if (max.reads<readsUsed) {cat("\n Only the first",max.reads,"reads for each region are used.")}
+    if (maxReads<readsUsed) {cat("\n Only the first",maxReads,"reads for each region are used. \n")}
 
     smoothWave=list()
     k = 1
@@ -100,7 +101,7 @@ setMethod("waveCorrelation","KineticWavelets",
         idx = gread[[i]]
         if(length(idx) > 0){
         ipd = getIPD(h5,idx=idx)
-        ipd_nums[i] = min(length(ipd),max.reads) 
+        ipd_nums[i] = min(length(ipd),maxReads) 
         }
         else{
             ipd_nums[i] = 0
@@ -131,17 +132,17 @@ setMethod("waveCorrelation","KineticWavelets",
         ipd <- getIPD(h5,idx=idx)
         pw <- getPulseWidth(h5,idx=idx)
         
-        for ( i in 1:min(length(ipd),max.reads)){
+        for ( i in 1:min(length(ipd),maxReads)){
             ins <- which(align[[i]][,2]=="-")
             
       if(length(ins)==0) {
         align[[i]]=align[[i]][,2]
 
-    if( total.time==TRUE) {
+    if( totalTime==TRUE) {
         instsTime=c(rep(0,length(ipd[[i]])));
         }
     }else{
-        if(total.time==TRUE){
+        if(totalTime==TRUE){
         instsTime=c(rep(0,length(ipd[[i]])))
         tempITime=0
         for ( j in 1:length(ins)){
@@ -164,7 +165,7 @@ setMethod("waveCorrelation","KineticWavelets",
             ipd[[i]] <- ipd[[i]][-ins]
             posit[[i]] <- posit[[i]][-ins]
             pw[[i]] <- pw[[i]][-ins]
-            if (total.time==TRUE) instsTime <- instsTime[-ins];
+            if (totalTime==TRUE) instsTime <- instsTime[-ins];
             }
         if(reading_g0){
           positz <- c(gR128[[k]][1]:gR128[[k]][2])  
@@ -174,7 +175,7 @@ setMethod("waveCorrelation","KineticWavelets",
         align[[i]] <- align[[i]][match(positz,posit[[i]])]
         ipd[[i]] <- ipd[[i]][match(positz,posit[[i]])]
         pw[[i]] <- pw[[i]][match(positz,posit[[i]])]
-        if (total.time==TRUE)   instsTime <- instsTime[match(positz,posit[[i]])];
+        if (totalTime==TRUE)   instsTime <- instsTime[match(positz,posit[[i]])];
         posit[[i]] <- positz
         if(reading_g0){ 
         interp <- interp.0[posit[[i]]]
@@ -185,15 +186,15 @@ setMethod("waveCorrelation","KineticWavelets",
         pw[[i]][is.na(pw[[i]])] <- 0
         
         
-           if (total.time==TRUE){
-           ipd.wst <- wd(rev(ipd[[i]]+pw[[i]]+instsTime),family="DaubExPhase",filter.number=filterNumber,type="station")
+           if (totalTime==TRUE){
+           ipd.wst <- wd(rev(ipd[[i]]+pw[[i]]+instsTime),family="DaubExPhase",filterNumber=filterNumber,type="station")
        }
        else{
-                ipd.wst <- wd(rev(ipd[[i]]),family="DaubExPhase",filter.number=filterNumber,type="station")
+                ipd.wst <- wd(rev(ipd[[i]]),family="DaubExPhase",filterNumber=filterNumber,type="station")
            }
            
            
-    pat.wst <- wd(rev(interp),family="DaubExPhase",filter.number=filterNumber,type="station")
+    pat.wst <- wd(rev(interp),family="DaubExPhase",filterNumber=filterNumber,type="station")
                     st.index = 128 * (read_insert - 1) + 1
                     end.index = 128 * (read_insert)
 

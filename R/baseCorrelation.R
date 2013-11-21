@@ -1,6 +1,10 @@
-setMethod("baseCorrelation","KineticWavelets",
-		function(Object,DNAPattern=NULL,minReadLength=200,maxReads=10000){
+setMethod("baseCorrelation",
+        signature("KineticWavelets","character","numeric","numeric")
+        ,
+		function(KineticWavelets,DNAPattern=NULL,minReadLength=200,maxReads=10000){
     interp = NULL
+    h5 = KineticWavelets@h5
+    reff =KineticWavelets@reff
 	if(!is.null(DNAPattern)){
 
         tempst <- getTemplateStrand(h5)

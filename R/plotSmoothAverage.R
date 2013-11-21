@@ -1,12 +1,12 @@
-setMethod('plotSmoothAverage',"KineticWavelets",
-                function(Object,waveCorrelation){
-        shiftWindow = Object@shift.window
-        DNAPattern = Object@DNAPattern
+setMethod('plotSmoothAverage',"list",
+                function(waveCorrelation){
         shrink = Object@shrink
         meanElementSize = waveCorrelation$meanElementSize
         align = waveCorrelation$alignments
         smoothWave = waveCorrelation$smoothWave
         totalElements = waveCorrelation$totalElements
+        shiftWindow = waveCorrelation$shiftWindow
+        DNAPattern = waveCorrelation$DNAPattern
 par(mfcol=c(3,1))   
 mean0=c()
 qnt0=matrix(NA,nrow=4,ncol=128)
@@ -49,6 +49,7 @@ qnt0=matrix(NA,nrow=4,ncol=128)
             qnt1[2,i]=quantile(smoothWave[[7]][idx,1],0.95)
             qnt1[3,i]=quantile(smoothWave[[7]][idx,1],0.1)
             qnt1[4,i]=quantile(smoothWave[[7]][idx,1],0.9)  
+        }
             plot(c(1:128),rev(mean1),ty="l",bty="n",ylab=expression(E(s(2))),xlab="position in window",main="2 bp smoothing",ylim=c(0,1.1*max(qnt1,mean1)),axes=F)
             byz=c(8*(1:16))
             axis(side=1,labels=poz,at=c(1,byz))

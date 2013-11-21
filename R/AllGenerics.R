@@ -1,12 +1,12 @@
 setGeneric("baseCorrelation",
-           function(Object, ...){standardGeneric("baseCorrelation")})
+           function(KineticWavelets,DNAPattern=NULL,minReadLength=200,maxReads=10000){standardGeneric("baseCorrelation")})
 setGeneric("waveCorrelation",
-           function(Object, ...){standardGeneric("waveCorrelation")})
+           function(KineticWavelets,DNAPattern,maxReads=10,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){standardGeneric("waveCorrelation")})
 setGeneric("plotDetailAverage",
-           function(Object, ...){standardGeneric("plotDetailAverage")})
+           function(waveCorrelation){standardGeneric("plotDetailAverage")})
 setGeneric("plotSmoothAverage",
-           function(Object, ...){standardGeneric("plotSmoothAverage")})
+           function(waveCorrelation){standardGeneric("plotSmoothAverage")})
 setGeneric("plotBaseCorrelation",
-            function(Object, ..){standardGeneric("plotBaseCorrelation")})
+            function(baseCorrelation){standardGeneric("plotBaseCorrelation")})
 setGeneric("plotPatternCorrelation",
-            function(Object, ..){standardGeneric("plotPatternCorrelation")})
+            function(baseCorrelation){standardGeneric("plotPatternCorrelation")})
