@@ -37,7 +37,7 @@ setMethod("waveCorrelation","KineticWavelets",
         gF128[[i]] <- c(c(temp - 127 + shiftWindow),c(temp + shiftWindow))
         forward_and_reverse_reads[read_number,] = c(c(temp - 127 + shiftWindow),c(temp + shiftWindow))
         read_number = read_number + 1
-    }
+        }
     }
 
     if (grepR[[1]][1]!=-1){

@@ -2,7 +2,7 @@ setMethod("plotDetailAverage","KineticWavelets",
         function(Object,waveCorrelation){
         DNAPattern = waveCorrelation$DNAPattern
         shrink = waveCorrelation$shrink
-        shift.window = waveCorrelation$shift.window
+        shiftWindow = waveCorrelation$shift.window
         detailWave = waveCorrelation$detailWave
         align = waveCorrelation$alignments
         meanElementSize = waveCorrelation$meanElementSize
@@ -35,7 +35,7 @@ setMethod("plotDetailAverage","KineticWavelets",
         plot(c(1:128),rev(mean0),ty="l",bty="n",ylab=expression(E(d(2))),xlab="position in window",main=mainz,ylim=c(min(qnt0,mean0),1.1*max(qnt0,mean0)),axes=F)
         axis(side=1,labels=poz,at=c(1,8*(1:16)))
         axis(side=2)
-        rect(shift.window+0.5,-100,shift.window+meanElementSize+0.5,100,col=rgb(0,0,1,0.1),border=NA)
+        rect(shiftWindow+0.5,-100,shift.window+meanElementSize+0.5,100,col=rgb(0,0,1,0.1),border=NA)
         segments(c(1:128),rev(qnt0[1,]),c(1:128),rev(qnt0[2,]),col=rgb(0,0,0,0.2))
         segments(c(1:128),rev(qnt0[3,]),c(1:128),rev(qnt0[4,]),col=rgb(0,0,0,0.4))
 
@@ -44,9 +44,9 @@ setMethod("plotDetailAverage","KineticWavelets",
         }
 
         if(totalElements!=1){
-            text((shift.window-5),1.05*(max(qnt0,mean0)),"Read:",cex=0.8)
+            text((shiftWindow-5),1.05*(max(qnt0,mean0)),"Read:",cex=0.8)
         }
-        text((shift.window+1):(shift.window+floor(meanElementSize)),1.05*(max(qnt0,mean0)),align[[1]][(shift.window+1):(shift.window+floor(meanElementSize))],cex=0.5);}
+        text((shiftWindow+1):(shift.window+floor(meanElementSize)),1.05*(max(qnt0,mean0)),align[[1]][(shift.window+1):(shift.window+floor(meanElementSize))],cex=0.5);}
         
         mean1=c()
         qnt1=matrix(NA,nrow=4,ncol=128)
@@ -66,7 +66,7 @@ setMethod("plotDetailAverage","KineticWavelets",
         axis(side=1,labels=poz,at=c(1,byz))
         axis(side=2)
         
-        rect(shift.window+0.5,-100,shift.window+meanElementSize+0.5,100,col=rgb(0,0,1,0.1),border=NA)
+        rect(shiftWindow+0.5,-100,shift.window+meanElementSize+0.5,100,col=rgb(0,0,1,0.1),border=NA)
         segments(c(1:128),rev(qnt1[1,]),c(1:128),rev(qnt1[2,]),col=rgb(0,0,0,0.2))
         segments(c(1:128),rev(qnt1[3,]),c(1:128),rev(qnt1[4,]),col=rgb(0,0,0,0.4))
 
@@ -75,8 +75,8 @@ setMethod("plotDetailAverage","KineticWavelets",
         }
 
         if(totalElements!=1) {
-            text((shift.window-5),1.05*(max(qnt1,mean1)),"Read:",cex=0.8)
-            text((shift.window+1):(shift.window+floor(meanElementSize)),1.05*(max(qnt1,mean1)),align[[1]][(shift.window+1):(shift.window+floor(meanElementSize))],cex=0.5);
+            text((shiftWindow-5),1.05*(max(qnt1,mean1)),"Read:",cex=0.8)
+            text((shiftWindow+1):(shift.window+floor(meanElementSize)),1.05*(max(qnt1,mean1)),align[[1]][(shift.window+1):(shift.window+floor(meanElementSize))],cex=0.5);
         }
         mean2=c()
         qnt2=matrix(NA,nrow=4,ncol=128)                 
@@ -94,7 +94,7 @@ setMethod("plotDetailAverage","KineticWavelets",
         axis(side=1,labels=poz,at=c(1,byz))
         axis(side=2)
         
-        rect(shift.window+0.5,-100,shift.window+meanElementSize+0.5,100,col=rgb(0,0,1,0.1),border=NA)
+        rect(shiftWindow+0.5,-100,shift.window+meanElementSize+0.5,100,col=rgb(0,0,1,0.1),border=NA)
 
         segments(c(1:128),rev(qnt2[1,]),c(1:128),rev(qnt2[2,]),col=rgb(0,0,0,0.2))
         segments(c(1:128),rev(qnt2[3,]),c(1:128),rev(qnt2[4,]),col=rgb(0,0,0,0.4))
@@ -104,7 +104,7 @@ setMethod("plotDetailAverage","KineticWavelets",
         }
         
         if(totalElements!=1) {
-            text((shift.window-5),1.05*(max(qnt2,mean2)),"Read:",cex=0.8)
-            text((shift.window+1):(shift.window+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shift.window+1):(shift.window+floor(meanElementSize))],cex=0.5);
+            text((shiftWindow-5),1.05*(max(qnt2,mean2)),"Read:",cex=0.8)
+            text((shiftWindow+1):(shift.window+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shift.window+1):(shift.window+floor(meanElementSize))],cex=0.5);
         }
 })

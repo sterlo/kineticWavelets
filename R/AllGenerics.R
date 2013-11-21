@@ -6,5 +6,7 @@ setGeneric("plotDetailAverage",
            function(Object, ...){standardGeneric("plotDetailAverage")})
 setGeneric("plotSmoothAverage",
            function(Object, ...){standardGeneric("plotSmoothAverage")})
-
-
+setGeneric("plotBaseCorrelation",
+            function(Object, ..){standardGeneric("plotBaseCorrelation")})
+setGeneric("plotPatternCorrelation",
+            function(Object, ..){standardGeneric("plotPatternCorrelation")})
