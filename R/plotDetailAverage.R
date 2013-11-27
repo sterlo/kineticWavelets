@@ -108,3 +108,4 @@ setMethod("plotDetailAverage","list",
             text((shiftWindow+1):(shiftWindow+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shiftWindow+1):(shiftWindow+floor(meanElementSize))],cex=0.5);
         }
 })
+;

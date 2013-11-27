@@ -170,3 +170,4 @@ setMethod("baseCorrelation","KineticWavelets"
 
     return(list(baseCorr=baseCorr,DNAPattern=DNAPattern,interp=interp))
 })
+;

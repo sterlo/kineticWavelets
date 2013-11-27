@@ -243,3 +243,4 @@ setMethod("waveCorrelation","KineticWavelets",
     }
         return(list(detailWave=detailWave,smoothWave=smoothWave,totalElements=totalElements,meanElementSize=meanElementSize,alignments=align,DNAPattern=DNAPattern,shiftWindow=shiftWindow,shrink=shrink))
 })
+;
