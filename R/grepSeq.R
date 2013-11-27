@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 grepSeq <- function(seqz,patternz,returnCounts=T){
     seqGrep <- gregexpr(patternz,seqz)
     grepPos=list()
