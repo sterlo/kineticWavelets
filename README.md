@@ -18,8 +18,10 @@ Installation
 In a R prompt type
 
 install.packages('devtools')
+
 library(devtools)
-install_github('KineticWavelets',username="sterlo')
+
+install_github('KineticWavelets',username='sterlo')
 
 to use the package type.
 
