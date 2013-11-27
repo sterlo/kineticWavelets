@@ -1,5 +1,20 @@
-setMethod("waveCorrelation",
-    signature("KineticWavelets","character","numeric","numeric","logical","numeric","numeric"),
+#' Reads a KineticWavelets object and creates wavelets for reads that match the DNAPattern
+#' @param KineticWavelets \code{linkS4class{KineticWavelets}} object
+#' @param DNAPattern The DNA pattern to search for in the reads.
+#' @param maxReads The maximum number of reads for each region
+#' @param shiftWindow 
+#' @param totalTime 
+#' @param filterNumber 
+#' @param shrink
+#' @return A list containing all the wavelet correlations to be passed to plotting 
+#'         functions or investigated.
+#' @author Sterling Sawaya \email{sterlingsawaya@gmail.com}
+#' @examples
+#' kin = KineticWavelets(h5,reff)
+#' wav = waveCorrelation(kin,DNAPattern="GCGCGCGCG")
+#'
+
+setMethod("waveCorrelation","KineticWavelets",
             function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
     h5 = KineticWavelets@h5
     reff = KineticWavelets@reff
@@ -187,14 +202,14 @@ setMethod("waveCorrelation",
         
         
            if (totalTime==TRUE){
-           ipd.wst <- wd(rev(ipd[[i]]+pw[[i]]+instsTime),family="DaubExPhase",filterNumber=filterNumber,type="station")
+           ipd.wst <- wd(rev(ipd[[i]]+pw[[i]]+instsTime),family="DaubExPhase",filter.number=filterNumber,type="station")
        }
        else{
-                ipd.wst <- wd(rev(ipd[[i]]),family="DaubExPhase",filterNumber=filterNumber,type="station")
+                ipd.wst <- wd(rev(ipd[[i]]),family="DaubExPhase",filter.number=filterNumber,type="station")
            }
            
            
-    pat.wst <- wd(rev(interp),family="DaubExPhase",filterNumber=filterNumber,type="station")
+    pat.wst <- wd(rev(interp),family="DaubExPhase",filter.number=filterNumber,type="station")
                     st.index = 128 * (read_insert - 1) + 1
                     end.index = 128 * (read_insert)
 

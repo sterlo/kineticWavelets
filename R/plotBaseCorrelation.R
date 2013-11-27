@@ -1,6 +1,6 @@
 setMethod('plotBaseCorrelation','list',
     function(baseCorrelation){
-    baseCorrelation=baseCorrelation$baseCorrelation
+    baseCorrelation=baseCorrelation$baseCorr
     levels=11
     names=colnames(baseCorrelation)
     par(mfcol=c(length(names),length(names)),mar=c(0,0,0,0.5),oma=c(4,3,3,2),xaxt="s",cex=0.5,las=1)

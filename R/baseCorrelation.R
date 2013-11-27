@@ -1,5 +1,4 @@
-setMethod("baseCorrelation",
-        signature("KineticWavelets","character","numeric","numeric")
+setMethod("baseCorrelation","KineticWavelets"
         ,
 		function(KineticWavelets,DNAPattern=NULL,minReadLength=200,maxReads=10000){
     interp = NULL
@@ -131,7 +130,7 @@ setMethod("baseCorrelation",
             }
 
             if(!is.null(DNAPattern)){
-            interp[[i]]=rev(waveSeq(reverseComplement(DNAString(c2s(align[[i]]))), DNAPattern,return.counts=F))
+            interp[[i]]=rev(grepSeq(reverseComplement(DNAString(c2s(align[[i]]))), DNAPattern,return.counts=F))
             }
 
         }
@@ -170,7 +169,7 @@ setMethod("baseCorrelation",
     colnames(baseCorr)=names
 
     # Maybe move this function
-    return(list(baseCorr=baseCorr,DNAPattern=DNAPattern,interp=interp))
+    return(list(baseCorrelation=baseCorr,DNAPattern=DNAPattern,interp=interp))
 })
 #pdf('base_corr.pdf')
 #
