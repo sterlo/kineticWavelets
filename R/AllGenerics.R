@@ -10,4 +10,4 @@ setGeneric("plotBaseCorrelation",
             function(baseCorrelation,...){standardGeneric("plotBaseCorrelation")})
 setGeneric("plotPatternCorrelation",
             function(baseCorrelation,...){standardGeneric("plotPatternCorrelation")})
-;
+
