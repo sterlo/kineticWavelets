@@ -70,4 +70,4 @@ setMethod("plotPatternCorrelation","list",
         }
     }
 })
-
+;
