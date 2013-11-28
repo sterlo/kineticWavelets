@@ -11,10 +11,10 @@
 #' @author Sterling Sawaya \email{sterlingsawaya@gmail.com}
 #' @examples
 #' kin = KineticWavelets(h5,reff)
-#' wav = waveCorrelation(kin,DNAPattern="GCGCGCGCG")
+#' wav = wave128Window(kin,DNAPattern="GCGCGCGCG")
 #'
 
-setMethod("waveCorrelation","KineticWavelets",
+setMethod("wave128Window","KineticWavelets",
             function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
     h5 = KineticWavelets@h5
     reff = KineticWavelets@reff
