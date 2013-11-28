@@ -1,5 +1,5 @@
 exportMethods(
-	"waveCorrelation",
+	"wave128Window",
 	"plotDetailAverage",
 	"plotSmoothAverage",
 	"plotBaseCorrelation",
