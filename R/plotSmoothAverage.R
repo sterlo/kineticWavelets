@@ -1,6 +1,6 @@
 setMethod('plotSmoothAverage',"list",
                 function(waveCorrelation){
-        shrink = Object@shrink
+        shrink = waveCorrelation$shrink
         meanElementSize = waveCorrelation$meanElementSize
         align = waveCorrelation$alignments
         smoothWave = waveCorrelation$smoothWave
