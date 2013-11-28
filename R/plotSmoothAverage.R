@@ -1,12 +1,12 @@
 setMethod('plotSmoothAverage',"list",
-                function(waveCorrelation){
-        shrink = waveCorrelation$shrink
-        meanElementSize = waveCorrelation$meanElementSize
-        align = waveCorrelation$alignments
-        smoothWave = waveCorrelation$smoothWave
-        totalElements = waveCorrelation$totalElements
-        shiftWindow = waveCorrelation$shiftWindow
-        DNAPattern = waveCorrelation$DNAPattern
+                function(wave128Window){
+        shrink = wave128Window$shrink
+        meanElementSize = wave128Window$meanElementSize
+        align = wave128Window$alignments
+        smoothWave = wave128Window$smoothWave
+        totalElements = wave128Window$totalElements
+        shiftWindow = wave128Window$shiftWindow
+        DNAPattern = wave128Window$DNAPattern
 par(mfcol=c(3,1))   
 mean0=c()
 qnt0=matrix(NA,nrow=4,ncol=128)

@@ -1,12 +1,12 @@
 setMethod("plotDetailAverage","list",
-        function(waveCorrelation){
-        DNAPattern = waveCorrelation$DNAPattern
-        shrink = waveCorrelation$shrink
-        shiftWindow = waveCorrelation$shiftWindow
-        detailWave = waveCorrelation$detailWave
-        align = waveCorrelation$alignments
-        meanElementSize = waveCorrelation$meanElementSize
-        totalElements = waveCorrelation$totalElements
+        function(wave128Window){
+        DNAPattern = wave128Window$DNAPattern
+        shrink = wave128Window$shrink
+        shiftWindow = wave128Window$shiftWindow
+        detailWave = wave128Window$detailWave
+        align = wave128Window$alignments
+        meanElementSize = wave128Window$meanElementSize
+        totalElements = wave128Window$totalElements
         par(mfcol=c(3,1))   
                         
         mean0=c()
