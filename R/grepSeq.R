@@ -13,4 +13,3 @@ grepSeq <- function(seqz,patternz,returnCounts=T){
     }
     if( seqGrep[[1]][1]==-1 ) {cat("\npattern not found \n")} 
 }
-;

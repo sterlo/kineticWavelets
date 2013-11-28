@@ -65,4 +65,3 @@ setMethod('plotBaseCorrelation','list',
             }
     }
 })
-;
