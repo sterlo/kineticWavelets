@@ -1,4 +1,3 @@
-setMethod('plotBaseCorrelation','list',
     function(baseCorrelation){
     baseCorrelation=baseCorrelation$baseCorr
     levels=11
@@ -64,4 +63,4 @@ setMethod('plotBaseCorrelation','list',
             if( i != j ) axis(4,tck=0.05,cex=0.5,labels=FALSE)
             }
     }
-})
+}

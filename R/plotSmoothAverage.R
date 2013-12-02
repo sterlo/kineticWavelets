@@ -1,4 +1,3 @@
-setMethod('plotSmoothAverage',"list",
                 function(wave128Window){
         shrink = wave128Window$shrink
         meanElementSize = wave128Window$meanElementSize
@@ -96,4 +95,4 @@ qnt0=matrix(NA,nrow=4,ncol=128)
      text((shiftWindow+1):(shiftWindow+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shiftWindow+1):(shiftWindow+floor(meanElementSize))],cex=0.5)
     }
             
-})
+}

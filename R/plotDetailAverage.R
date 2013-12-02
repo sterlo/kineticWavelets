@@ -1,4 +1,3 @@
-setMethod("plotDetailAverage","list",
         function(wave128Window){
         DNAPattern = wave128Window$DNAPattern
         shrink = wave128Window$shrink
@@ -107,5 +106,5 @@ setMethod("plotDetailAverage","list",
             text((shiftWindow-5),1.05*(max(qnt2,mean2)),"Read:",cex=0.8)
             text((shiftWindow+1):(shiftWindow+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shiftWindow+1):(shiftWindow+floor(meanElementSize))],cex=0.5);
         }
-})
+}
 

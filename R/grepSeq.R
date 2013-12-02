@@ -1,3 +1,22 @@
+#' Searches sequences for a given pattern.
+#' 
+#' The function returns a vector the length of seqz 
+#' that contains a 1 if the position matched the pattern
+#' otherwise 0.
+#'
+#' @param seqz Character vector representing the to search for pattern in.
+#' @param patternz Regular expression to look for
+#' @param returnCounts if \code{TRUE} print the number of matches.
+#' 
+#' @return A vector containing the matches.
+#' @author Sterling Sawaya \email{sterlingsawaya@@gmail.com}
+#' @export
+#' @examples
+#' grepSeq('ATCTCTCTTCTCTTC','TC')
+#' # 6 regions found 
+#' # [1] 0 1 1 1 1 1 1 0 1 1 1 1 0 1 1
+#'
+
 grepSeq <- function(seqz,patternz,returnCounts=T){
     seqGrep <- gregexpr(patternz,seqz)
     grepPos=list()

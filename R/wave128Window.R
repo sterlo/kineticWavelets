@@ -1,21 +1,13 @@
-#' Reads a KineticWavelets object and creates wavelets for reads that match the DNAPattern
-#' @param KineticWavelets \code{linkS4class{KineticWavelets}} object
-#' @param DNAPattern The DNA pattern to search for in the reads.
-#' @param maxReads The maximum number of reads for each region
 #' @param shiftWindow 
 #' @param totalTime 
 #' @param filterNumber 
 #' @param shrink
-#' @return A list containing all the wavelet correlations to be passed to plotting 
-#'         functions or investigated.
-#' @author Sterling Sawaya \email{sterlingsawaya@gmail.com}
-#' @examples
-#' kin = KineticWavelets(h5,reff)
-#' wav = wave128Window(kin,DNAPattern="GCGCGCGCG")
+#' @docType methods
+#' @rdname wave128Window-methods
 #'
 
-setMethod("wave128Window","KineticWavelets",
-            function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
+setMethod(f="wave128Window",signature("KineticWavelets","character")
+,            function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
     h5 = KineticWavelets@h5
     reff = KineticWavelets@reff
 

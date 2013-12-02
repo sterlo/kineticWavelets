@@ -1,18 +1,10 @@
-exportMethods(
-	"wave128Window",
-	"plotDetailAverage",
-	"plotSmoothAverage",
-	"plotBaseCorrelation",
-	"plotPatternCorrelation",
-	"baseCorrelation"
-)
-exportClasses(
-	"KineticWavelets"
-)
-import(pbh5)
+export(baseCorrelation)
+export(grepSeq)
+export(wave128Window)
+exportClasses(KineticWavelets)
+exportMethods(baseCorrelation)
 import(Biostrings)
+import(ShortRead)
+import(pbh5)
 import(seqinr)
 import(wavethresh)
-import(ShortRead)
-export(grepSeq)
-export(KineticWavelets)

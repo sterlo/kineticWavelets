@@ -1,3 +1,11 @@
+#' @param DNAPattern The DNA pattern to search for in the reads.
+#' @param minReadLength minimum read length
+#' @param maxReads maximum number of reads to correlate.
+#' @rdname baseCorrelation-methods
+#' @docType methods
+#' @return A list containing all the base correlations.
+#' @export
+#'
 setMethod("baseCorrelation","KineticWavelets"
         ,
 		function(KineticWavelets,DNAPattern=NULL,minReadLength=200,maxReads=10000){

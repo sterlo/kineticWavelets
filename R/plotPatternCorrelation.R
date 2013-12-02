@@ -1,4 +1,3 @@
-setMethod("plotPatternCorrelation","list",
     function(baseCorrelation){
     if(is.null(DNAPattern)){
         stop("DNAPattern is null cannot plotPatternCorrelation")
@@ -69,4 +68,4 @@ setMethod("plotPatternCorrelation","list",
         if (i==length(names) & j <length(names))axis(4,tck=0.05,cex=0.5) 
         }
     }
-})
+}
