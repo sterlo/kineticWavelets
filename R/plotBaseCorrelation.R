@@ -1,5 +1,7 @@
-    function(baseCorrelation){
-    baseCorrelation=baseCorrelation$baseCorr
+#'@exportMethod plotBaseCorrelation
+setMethod(f='plotBaseCorrelation',"BaseCorrelation",
+    function(BaseCorrelation){
+    baseCorrelation=BaseCorrelation@baseCorr
     levels=11
     names=colnames(baseCorrelation)
     par(mfcol=c(length(names),length(names)),mar=c(0,0,0,0.5),oma=c(4,3,3,2),xaxt="s",cex=0.5,las=1)
@@ -63,4 +65,4 @@
             if( i != j ) axis(4,tck=0.05,cex=0.5,labels=FALSE)
             }
     }
-}
+});

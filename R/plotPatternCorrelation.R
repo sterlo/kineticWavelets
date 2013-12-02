@@ -1,9 +1,11 @@
-    function(baseCorrelation){
+#' @exportMethod plotPatternCorrelation
+setMethod(f="plotPatternCorrelation","BaseCorrelation",
+function(BaseCorrelation){
     if(is.null(DNAPattern)){
         stop("DNAPattern is null cannot plotPatternCorrelation")
     } 
-	interp=unlist(baseCorrelation$interp)[1:2^maxpwr]
-    baseCorrelation=cbind(baseCorrelation$baseCorrelation[,1],baseCorrelation$baseCorrelation[,2],interp)
+	interp=unlist(BaseCorrelation@interp)[1:2^maxpwr]
+    baseCorrelation=cbind(BaseCorrelation@baseCorrelation[,1],baseCorrelation$baseCorrelation[,2],interp)
     names=c("IPD",'Inserts',
     paste('Pattern (',round(sum(interp)/length(interp),2),")",sep=""))
     colnames(baseCorrelation)=names
@@ -68,4 +70,4 @@
         if (i==length(names) & j <length(names))axis(4,tck=0.05,cex=0.5) 
         }
     }
-}
+});

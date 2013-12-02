@@ -1,11 +1,13 @@
-        function(wave128Window){
-        DNAPattern = wave128Window$DNAPattern
-        shrink = wave128Window$shrink
-        shiftWindow = wave128Window$shiftWindow
-        detailWave = wave128Window$detailWave
-        align = wave128Window$alignments
-        meanElementSize = wave128Window$meanElementSize
-        totalElements = wave128Window$totalElements
+#' @exportMethod plotDetailAverage
+setMethod(f="plotDetailAverage","Wave128",        
+function(Wave128){
+        DNAPattern = Wave128@DNAPattern
+        shrink = Wave128@shrink
+        shiftWindow = Wave128@shiftWindow
+        detailWave = Wave128@detailWave
+        align = Wave128@alignments
+        meanElementSize = Wave128@meanElementSize
+        totalElements = Wave128@totalElements
         par(mfcol=c(3,1))   
                         
         mean0=c()
@@ -106,5 +108,5 @@
             text((shiftWindow-5),1.05*(max(qnt2,mean2)),"Read:",cex=0.8)
             text((shiftWindow+1):(shiftWindow+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shiftWindow+1):(shiftWindow+floor(meanElementSize))],cex=0.5);
         }
-}
+});
 

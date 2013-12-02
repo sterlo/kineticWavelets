@@ -22,8 +22,6 @@ baseCorrelation(KineticWavelets, ...)
 }
 \value{
 A list containining the base correlations
-
-A list containing all the base correlations.
 }
 \description{
 Reads a KineticWavelets object and perform base correlation

@@ -3,8 +3,7 @@
 #' @param maxReads maximum number of reads to correlate.
 #' @rdname baseCorrelation-methods
 #' @docType methods
-#' @return A list containing all the base correlations.
-#' @export
+#' @exportMethod baseCorrelation
 #'
 setMethod("baseCorrelation","KineticWavelets"
         ,
@@ -176,5 +175,5 @@ setMethod("baseCorrelation","KineticWavelets"
 
     colnames(baseCorr)=names
 
-    return(list(baseCorr=baseCorr,DNAPattern=DNAPattern,interp=interp))
-})
+    return(new("BaseCorrelation",baseCorr=baseCorr,DNAPattern=DNAPattern,interp=interp))
+});

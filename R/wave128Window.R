@@ -4,10 +4,10 @@
 #' @param shrink
 #' @docType methods
 #' @rdname wave128Window-methods
-#'
+#' @exportMethod wave128Window
 
-setMethod(f="wave128Window","KineticWavelets"
-,            function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
+setMethod(f="wave128Window","KineticWavelets",
+          function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
     h5 = KineticWavelets@h5
     reff = KineticWavelets@reff
 
@@ -233,5 +233,5 @@ setMethod(f="wave128Window","KineticWavelets"
         detailWave[[j]][detailWave[[j]]>0] <- detailWave[[j]][detailWave[[j]]>0]-qnt
                 }   
     }
-        return(list(detailWave=detailWave,smoothWave=smoothWave,totalElements=totalElements,meanElementSize=meanElementSize,alignments=align,DNAPattern=DNAPattern,shiftWindow=shiftWindow,shrink=shrink))
+        return(new("Wave128",detailWave=detailWave,smoothWave=smoothWave,totalElements=totalElements,meanElementSize=meanElementSize,alignments=align,DNAPattern=DNAPattern,shiftWindow=shiftWindow,shrink=shrink))
 })

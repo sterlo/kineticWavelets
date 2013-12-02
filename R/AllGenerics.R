@@ -3,7 +3,6 @@
 #' Reads a KineticWavelets object and perform base correlation
 #' @param KineticWavelets \code{linkS4class{KineticWavelets}} object
 #' @rdname baseCorrelation-methods
-#' @export
 #' @author Sterling Sawaya \email{sterlingsawaya@@gmail.com}
 #' @return A list containining the base correlations
 
@@ -17,8 +16,53 @@ setGeneric("baseCorrelation",
 #' @param DNAPattern The DNA pattern to search for in the reads
 #' @rdname wave128Window-methods
 #' @author Sterling Sawaya \email{sterlingsawaya@@gmail.com}
-#' @export
 #' @return A list containining the kinetics for matched sequences
 
 setGeneric("wave128Window",
-           function(KineticWavelets,DNAPattern,...){standardGeneric("wave128Window")})
+           function(KineticWavelets,DNAPattern,...){
+            standardGeneric("wave128Window")})
+
+#' plotBaseCorrelation
+#'
+#' Reads a BaseCorrelation object and creates a plot showing
+#' correlation to each base pair
+#'
+#' @param BaseCorrelation \code{linkS4class{BaseCorrelation}} object
+#' @rdname plotBaseCorrelation-methods
+#'
+setGeneric('plotBaseCorrelation',
+            function(BaseCorrelation,...){
+            standardGeneric('plotBaseCorrelation')})
+#' plotPatternCorrelation
+#'
+#' Reads a BaseCorrelation object and creates a plot showing
+#' correlation to a DNA pattern, will return an error 
+#' if baseCorrelation was called without a DNAPattern
+#'
+#' @param BaseCorrelation \code{linkS4class{BaseCorrelation}} object
+#' @rdname plotPatternCorrelation-methods
+#'
+setGeneric('plotPatternCorrelation',
+            function(BaseCorrelation,...){
+            standardGeneric('plotPatternCorrelation')})
+#' plotSmoothAverage 
+#' 
+#' Reads a Wave128 object and creates a plot using
+#' the smooth values.
+#' 
+#' @param Wave128 \code{linkS4class{Wave128}} object
+#' @rdname plotSmoothAverage-methods
+setGeneric('plotSmoothAverage',
+            function(Wave128,...){
+            standardGeneric('plotSmoothAverage')})
+#' plotDetailAverage
+#' 
+#' Reads a Wave128 object a creates a plot using the 
+#' detail values
+#' 
+#' @param Wave128 \code{linkS4class{Wave128}} object
+#' @rdname plotSmoothAverage-methods
+
+setGeneric('plotDetailAverage',
+            function(Wave128,...){
+            standardGeneric('plotDetailAverage')})

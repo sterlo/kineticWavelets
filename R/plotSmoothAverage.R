@@ -1,11 +1,13 @@
-                function(wave128Window){
-        shrink = wave128Window$shrink
-        meanElementSize = wave128Window$meanElementSize
-        align = wave128Window$alignments
-        smoothWave = wave128Window$smoothWave
-        totalElements = wave128Window$totalElements
-        shiftWindow = wave128Window$shiftWindow
-        DNAPattern = wave128Window$DNAPattern
+#' @exportMethod plotSmoothAverage
+setMethod(f="plotSmoothAverage","Wave128",
+function(Wave128){
+        shrink = Wave128@shrink
+        meanElementSize = Wave128@meanElementSize
+        align = Wave128@alignments
+        smoothWave = Wave128@smoothWave
+        totalElements = Wave128@totalElements
+        shiftWindow = Wave128@shiftWindow
+        DNAPattern = Wave128@DNAPattern
 par(mfcol=c(3,1))   
 mean0=c()
 qnt0=matrix(NA,nrow=4,ncol=128)
@@ -95,4 +97,4 @@ qnt0=matrix(NA,nrow=4,ncol=128)
      text((shiftWindow+1):(shiftWindow+floor(meanElementSize)),1.05*(max(qnt2,mean2)),align[[1]][(shiftWindow+1):(shiftWindow+floor(meanElementSize))],cex=0.5)
     }
             
-}
+});
