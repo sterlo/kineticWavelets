@@ -1,3 +1,4 @@
+export(KineticWavelets)
 export(baseCorrelation)
 export(grepSeq)
 export(wave128Window)

@@ -1,12 +1,12 @@
 \docType{methods}
 \name{wave128Window}
 \alias{wave128Window}
-\alias{wave128Window,KineticWavelets,character-method}
+\alias{wave128Window,KineticWavelets-method}
 \title{wave128Window generic}
 \usage{
 wave128Window(KineticWavelets, DNAPattern, ...)
 
-\S4method{wave128Window}{KineticWavelets,character}(KineticWavelets, DNAPattern,
+\S4method{wave128Window}{KineticWavelets}(KineticWavelets, DNAPattern,
   maxReads = 1000, shiftWindow = 64, totalTime = TRUE, filterNumber = 1,
   shrink = 1)
 }

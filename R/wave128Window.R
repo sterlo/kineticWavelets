@@ -6,7 +6,7 @@
 #' @rdname wave128Window-methods
 #'
 
-setMethod(f="wave128Window",signature("KineticWavelets","character")
+setMethod(f="wave128Window","KineticWavelets"
 ,            function(KineticWavelets,DNAPattern,maxReads=1000,shiftWindow=64,totalTime=TRUE,filterNumber=1,shrink=1){
     h5 = KineticWavelets@h5
     reff = KineticWavelets@reff
