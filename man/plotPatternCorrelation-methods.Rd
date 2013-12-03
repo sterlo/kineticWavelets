@@ -10,7 +10,7 @@ plotPatternCorrelation(BaseCorrelation, ...)
 }
 \description{
 Reads a BaseCorrelation object and creates a plot showing
-correlation to a DNA pattern, will return an error if
-baseCorrelation was called without a DNAPattern
+correlation of kinetics with a DNA pattern.  Returns an error if
+baseCorrelation was called without a DNAPattern.
 }
 

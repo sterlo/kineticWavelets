@@ -18,7 +18,7 @@ baseCorrelation(KineticWavelets, ...)
 
   \item{minReadLength}{minimum read length}
 
-  \item{maxReads}{maximum number of reads to correlate.}
+  \item{maxReads}{maximum number of reads to examine.}
 }
 \value{
 A list containining the base correlations
