@@ -5,7 +5,8 @@
 grepSeq(seqz, patternz, returnCounts = T)
 }
 \arguments{
-  \item{seqz}{Character vector representing the sequence in which to search for a pattern.}
+  \item{seqz}{Character vector representing the to search
+  for a pattern.}
 
   \item{patternz}{Regular expression to search for}
 
@@ -16,9 +17,9 @@ grepSeq(seqz, patternz, returnCounts = T)
 A vector containing the matches.
 }
 \description{
-The function returns a vector the length of the original sequence (seqz) that
-contains a 1 if the position matched the pattern otherwise
-0.
+The function returns a vector the length of the original
+sequence (seqz) that contains a 1 if the position matched
+the pattern otherwise 0.
 }
 \examples{
 grepSeq('ATCTCTCTTCTCTTC','TC')

@@ -25,7 +25,10 @@ setGeneric("wave128Window",
 #' plotBaseCorrelation
 #'
 #' Reads a BaseCorrelation object and creates a plot showing
-#' correlation to each base pair
+#' correlation between the smooth (top right) and detail (bottom left)
+#' wavelet coeffcients at each scale, between each pair of variables.
+#' The relationships between inter-pulse duration, the number of inserts,
+#' and each individual nucleotide base are all examined.
 #'
 #' @param BaseCorrelation \code{linkS4class{BaseCorrelation}} object
 #' @rdname plotBaseCorrelation-methods
@@ -36,7 +39,7 @@ setGeneric('plotBaseCorrelation',
 #' plotPatternCorrelation
 #'
 #' Reads a BaseCorrelation object and creates a plot showing
-#' correlation to a DNA pattern, will return an error 
+#' correlation of kinetics with aa DNA pattern. Returns an error 
 #' if baseCorrelation was called without a DNAPattern
 #'
 #' @param BaseCorrelation \code{linkS4class{BaseCorrelation}} object

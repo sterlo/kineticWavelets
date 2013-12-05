@@ -9,7 +9,11 @@ plotBaseCorrelation(BaseCorrelation, ...)
   object}
 }
 \description{
-Reads a BaseCorrelation object and creates a plot showing the
-correlations between the smooth (top right) and detail (bottom left) wavelet coefficients at each scale, between each pair of variables.  The relationships between inter-pulse duration, the number of inserts, and each individual nucleotide base are all examined.
+Reads a BaseCorrelation object and creates a plot showing
+correlation between the smooth (top right) and detail
+(bottom left) wavelet coeffcients at each scale, between
+each pair of variables. The relationships between
+inter-pulse duration, the number of inserts, and each
+individual nucleotide base are all examined.
 }
 

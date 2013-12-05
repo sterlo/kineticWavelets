@@ -1,11 +1,11 @@
 #' Searches sequences for a given pattern.
 #' 
-#' The function returns a vector the length of seqz 
+#' The function returns a vector the length of the original sequence (seqz)
 #' that contains a 1 if the position matched the pattern
 #' otherwise 0.
 #'
-#' @param seqz Character vector representing the to search for pattern in.
-#' @param patternz Regular expression to look for
+#' @param seqz Character vector representing the to search for a pattern.
+#' @param patternz Regular expression to search for
 #' @param returnCounts if \code{TRUE} print the number of matches.
 #' 
 #' @return A vector containing the matches.

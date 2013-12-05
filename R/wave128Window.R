@@ -1,7 +1,8 @@
-#' @param shiftWindow 
-#' @param totalTime 
-#' @param filterNumber 
-#' @param shrink
+#' @param shiftWindow The shift window determines where in the 128 bp window the element
+#'        of interest lies. Default is 32 so that the element starts at base 33 in the window (i.e shifted from 1 by 32). 
+#' @param totalTime If set te TRUE, they analysis will include the time spent on insert errors in the measurements. The default totalTime==FALSE results in an analysis in which the time spent on insert errors is not included.
+#' @param filterNumber The allows the filters number used in the wavelets transform to be adjusted. The default is filterNumber==1, the Haar wavelet transform.
+#' @param shrink The shrink options allows for only the upper quantiles to be examined. The default shrink==1 removes no data from the measurements. If shrink is set below 1, then only the values for the upper quantile above "shrink" are used (e.g shrink==0.05 returns the top 5 percent of the result). Measurements are shrunk at each scale of the wavelet coefficients.
 #' @docType methods
 #' @rdname wave128Window-methods
 #' @exportMethod wave128Window
