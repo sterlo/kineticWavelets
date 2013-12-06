@@ -137,7 +137,7 @@ setMethod("baseCorrelation","KineticWavelets"
             }
 
             if(!is.null(DNAPattern)){
-            interp[[i]]=rev(grepSeq(reverseComplement(DNAString(c2s(align[[i]]))), DNAPattern,return.counts=F))
+            interp[[i]]=rev(grepSeq(reverseComplement(DNAString(c2s(align[[i]]))), DNAPattern,returnCounts=F))
             }
 
         }

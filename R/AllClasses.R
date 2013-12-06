@@ -58,6 +58,6 @@ setClass('Wave128',
 
 
 setClass('BaseCorrelation',
-        representation(baseCorr='matrix',DNAPattern='character',interp='list'),
+        representation(baseCorr='matrix',DNAPattern='character or NULL',interp='list or NULL'),
         prototype(baseCorr=NULL,DNAPattern=NULL,interp=NULL)
 );
