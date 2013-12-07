@@ -1,3 +1,7 @@
+# Create class union so objects can be null
+setClassUnion('character.or.null',c('character','NULL'))
+setClassUnion('list.or.null',c('list','NULL'))
+
 #' KineticWavelets class.
 #' 
 #' The class is used to track a CmpH5 file and a reference fasta 
@@ -58,6 +62,6 @@ setClass('Wave128',
 
 
 setClass('BaseCorrelation',
-        representation(baseCorr='matrix',DNAPattern='character or NULL',interp='list or NULL'),
+        representation(baseCorr='matrix',DNAPattern='character.or.null',interp='list.or.null'),
         prototype(baseCorr=NULL,DNAPattern=NULL,interp=NULL)
 );
