@@ -64,7 +64,7 @@ setGeneric('plotSmoothAverage',
 #' detail values
 #' 
 #' @param Wave128 \code{linkS4class{Wave128}} object
-#' @rdname plotSmoothAverage-methods
+#' @rdname plotDetailAverage-methods
 
 setGeneric('plotDetailAverage',
             function(Wave128,...){
