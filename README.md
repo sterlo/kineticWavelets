@@ -4,13 +4,39 @@ KineticWavelets
 Prerequisites
 ==============
 
+Bioconductor
+------------
+
+Biostrings and ShortRead packages from Bioconductor.
+
+h5r
+---
+
+Install hdf5 library for your OS, for me using OSX and the homebrew package manager
+the relevant command was `brew install hdf5` 
+
+Run the command.
+
+`wget http://cran.r-project.org/src/contrib/Archive/h5r/h5r_1.4.7.tar.gz`
+
+Then install from within R using install.packages setting repos to NULL and
+the type to 'source'.
+
+install.packages('<path to h5r.tar.gz>', repos = NULL, type="source")
+
 Any packages available from CRAN will be installed by default. 
 
-Other packages that are needed are the R-pbh5 library from Pacific Biosciences.
+R-pbh5
+------
 
-https://github.com/PacificBiosciences/R-pbh5
+Run the command
 
-And the Biostrings and ShortRead packages from Bioconductor.
+`git clone https://github.com/PacificBiosciences/R-pbh5`
+
+then
+
+`R CMD INSTALL R-pbh5`
+
 
 Installation
 ============
@@ -20,6 +46,7 @@ In a R prompt type
 install.packages('devtools')
 
 library(devtools)
+
 
 install_github('KineticWavelets',username='sterlo')
 
