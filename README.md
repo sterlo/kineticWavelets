@@ -4,10 +4,16 @@ KineticWavelets
 Prerequisites
 ==============
 
-Bioconductor
-------------
+Bioconductor packages
+---------------------
 
 Biostrings and ShortRead packages from Bioconductor.
+
+If you are unfamiliar with bioconductor merely run the following
+commands at your R prompt.
+
+`source("http://bioconductor.org/biocLite.R")`
+`biocLite(c('shortRead','Biostrings'))`
 
 h5r
 ---
